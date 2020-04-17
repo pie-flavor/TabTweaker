@@ -10,8 +10,8 @@ plugins {
     id("net.minecrell.licenser") version "0.4.1"
 }
 
-group = "PS_TEMPLATE_GROUP_NAME"
-version = "PS_TEMPLATE_VERSION"
+group = "flavor.pie"
+version = "0.1.0"
 
 repositories {
     mavenCentral()
@@ -51,8 +51,8 @@ tasks.named("jar") {
 val shadowJar = tasks.named<ShadowJar>("shadowJar") {
     configurations = listOf(project.configurations.shadow.get())
     archiveClassifier.set("")
-    relocate("kotlin", "PS_TEMPLATE_BASE_PACKAGE_NAME.runtime.kotlin")
-    relocate("flavor.pie.kludge", "PS_TEMPLATE_BASE_PACKAGE_NAME.util.kludge")
+    relocate("kotlin", "flavor.pie.runtime.kotlin")
+    relocate("flavor.pie.kludge", "flavor.pie.util.kludge")
     minimize()
 }
 
@@ -73,9 +73,9 @@ publishing {
         create("sponge", MavenPublication::class.java) {
             project.shadow.component(this)
             pom {
-                name.set("PS_TEMPLATE_PLUGIN_NAME")
-                description.set("PS_TEMPLATE_PLUGIN_DESCRIPTION")
-                url.set("https://ore.spongepowered.org/PS_TEMPLATE_USER_NAME/PS_TEMPLATE_PLUGIN_ID/")
+                name.set("TabTweaker")
+                description.set("Tweaks the tab list.")
+                url.set("https://ore.spongepowered.org/pie_flavor/tabtweaker/")
                 licenses {
                     license {
                         name.set("MIT License")
@@ -84,15 +84,15 @@ publishing {
                 }
                 developers {
                     developer {
-                        id.set("PS_TEMPLATE_USER_NAME")
-                        name.set("PS_TEMPLATE_USER_REAL_NAME")
-                        email.set("PS_TEMPLATE_USER_EMAIL")
+                        id.set("pie_flavor")
+                        name.set("Adam Spofford")
+                        email.set("aspofford.as@gmail.com")
                     }
                 }
                 scm {
-                    connection.set("scm:git:git://github.com/PS_TEMPLATE_GITHUB_USER_NAME/PS_TEMPLATE_PROJECT_NAME.git")
-                    developerConnection.set("scm:git:ssh://github.com/PS_TEMPLATE_GITHUB_USER_NAME/PS_TEMPLATE_PROJECT_NAME.git")
-                    url.set("https://github.com/PS_TEMPLATE_GITHUB_USER_NAME/PS_TEMPLATE_PROJECT_NAME/")
+                    connection.set("scm:git:git://github.com/pie-flavor/TabTweaker.git")
+                    developerConnection.set("scm:git:ssh://github.com/pie-flavor/TabTweaker.git")
+                    url.set("https://github.com/pie-flavor/TabTweaker/")
                 }
             }
         }
@@ -100,9 +100,9 @@ publishing {
             val githubToken: String? by project
             if (githubToken != null) {
                 maven {
-                    url = uri("https://maven.pkg.github.org/PS_TEMPLATE_GITHUB_USER_NAME/PS_TEMPLATE_PROJECT_NAME")
+                    url = uri("https://maven.pkg.github.org/pie-flavor/TabTweaker")
                     credentials {
-                        username = "PS_TEMPLATE_GITHUB_USER_NAME"
+                        username = "pie-flavor"
                         password = githubToken
                     }
                 }
@@ -114,3 +114,4 @@ publishing {
 license {
     exclude("**/*.conf")
 }
+
